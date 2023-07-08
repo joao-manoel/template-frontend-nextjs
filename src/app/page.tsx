@@ -10,7 +10,7 @@ import { RiLockPasswordLine } from 'react-icons/ri'
 export default function Login() {
   const { register, handleSubmit, control } = useForm()
 
-  const { signIn, user } = useAuthContext()
+  const { signIn, errorMessage } = useAuthContext()
 
   const handleSubmitFormSignIn = (data: any) => {
     signIn(data)
@@ -29,6 +29,9 @@ export default function Login() {
         <header className="flex justify-center">
           <Image src="images/icon-logo.svg" alt="Logo" width={50} height={50} />
         </header>
+        <div className="flex justify-center text-red-400">
+          {errorMessage && <span>{errorMessage}</span>}
+        </div>
         <Input.Root>
           <Input.Label htmlFor="email" icon={AiOutlineMail} />
           <Input.Input
@@ -52,8 +55,6 @@ export default function Login() {
         </Input.Root>
 
         <Button type="submit">Acessar</Button>
-
-        {user && <span>Bem vindo {user.username}</span>}
       </form>
     </main>
   )

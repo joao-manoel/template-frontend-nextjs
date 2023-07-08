@@ -29,6 +29,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputItemProps> = (
           px-1 py-1
           group-focus:bg-red-100
           "
+          {...inputRest}
           {...rest}
         />
       )}

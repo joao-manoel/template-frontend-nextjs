@@ -68,14 +68,12 @@ type AuthContextData = {
   signOut: () => void
   user: User | undefined
   isAuthenticated: boolean
+  isLoading: boolean
+  errorMessage: string | undefined
 }
 
 type ErrorSignInResponse = {
-  response: {
-    data: {
-      error: string
-    }
-  }
+  error: string
 }
 
 const _optionsCookies = {
@@ -93,6 +91,8 @@ export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>()
+  const [errorMessage, setErrorMessage] = useState<string | undefined>()
+  const [isLoading, setLoading] = useState<boolean>(false)
   const isAuthenticated = !!user
 
   const router = useRouter()
@@ -101,6 +101,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // responsavel por verifica se existe um token e validar no servidor
     try {
       const { 'rscore.token': token } = parseCookies()
+      setLoading(true)
 
       if (token) {
         api
@@ -111,24 +112,28 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             setUser({ email, username, roles })
 
-            console.log()
+            setLoading(false)
           })
           .catch(() => {
             signOut()
+            setLoading(false)
           })
       }
     } catch (error) {}
   }, [])
 
   function signOut() {
+    setLoading(true)
     destroyCookie(undefined, 'rscore.token')
 
     // authChannel.postMessage('signOut')
 
+    setLoading(false)
     router.push('/')
   }
 
   async function signIn({ email, password }: SignInCredentials) {
+    setLoading(true)
     try {
       const response = (await api.post('/session', {
         email,
@@ -148,11 +153,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
       router.push('/dashboard')
+      setLoading(false)
     } catch (err) {
       if (isAxiosError<ErrorSignInResponse>(err)) {
-        const errorMessage = err.response?.data.error
-
-        return errorMessage || 'Any Error'
+        setErrorMessage(err.response?.data.error)
       }
     }
   }
@@ -164,6 +168,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signOut,
         user,
         isAuthenticated,
+        isLoading,
+        errorMessage,
       }}
     >
       {children}
