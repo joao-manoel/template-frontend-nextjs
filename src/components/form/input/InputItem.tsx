@@ -23,11 +23,10 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputItemProps> = (
       defaultValue={''}
       render={({ field: { ref, ...rest } }) => (
         <input
-          className="bg-transparent w-full 
-          text-black dark:text-gray-300
-          outline-0
-          px-1 py-1
-          group-focus:bg-red-100
+          className="
+            bg-transparent w-full 
+            text-black dark:text-white dark:placeholder:text-zinc-400       
+            outline-0 px-1 py-3 placeholder:font-extralight
           "
           {...inputRest}
           {...rest}

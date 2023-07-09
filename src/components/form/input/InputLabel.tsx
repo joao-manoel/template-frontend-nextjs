@@ -12,7 +12,7 @@ export function InputLabel({ text, icon: Icon, ...rest }: InputLabelProps) {
       {...rest}
     >
       {Icon ? (
-        <Icon className="text-slate-400 text-2xl" />
+        <Icon className="text-zinc-400 text-1xl" />
       ) : text ? (
         <p>{text}</p>
       ) : null}

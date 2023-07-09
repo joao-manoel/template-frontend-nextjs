@@ -1,49 +1,67 @@
 'use client'
+
+import { Alert } from '@/components/alert'
 import { Button } from '@/components/form/button'
 import { Input } from '@/components/form/input'
 import { useAuthContext } from '@/contexts/AuthContext'
-import Image from 'next/image'
+
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineMail } from 'react-icons/ai'
+import { FaSignInAlt } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
+import { z } from 'zod'
+
+const signInFormSchema = z.object({
+  email: z
+    .string()
+    .nonempty('O e-mail é obrigatório')
+    .email('Formato de e-mail inválido'),
+  password: z.string().min(6, 'A senha precisa de no minimo 6 caracteres'),
+})
+
+type SignInFormData = z.infer<typeof signInFormSchema>
 
 export default function Login() {
-  const { register, handleSubmit, control } = useForm()
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInFormSchema),
+  })
 
   const { signIn, errorMessage } = useAuthContext()
 
-  const handleSubmitFormSignIn = (data: any) => {
+  const handleFormSignIn = (data: any) => {
     signIn(data)
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <form
-        onSubmit={handleSubmit(handleSubmitFormSignIn)}
+        onSubmit={handleSubmit(handleFormSignIn)}
         className="
           md:w-11/12 w-4/5 max-w-sm h-2/6 px-4 py-7
           flex flex-col gap-5
-          shadow-2xl border-2 border-gray-300 dark:border-gray-900 rounded-md
+          shadow-2xl rounded-md
         "
       >
-        <header className="flex justify-center">
-          <Image src="images/icon-logo.svg" alt="Logo" width={50} height={50} />
-        </header>
-        <div className="flex justify-center text-red-400">
-          {errorMessage && <span>{errorMessage}</span>}
-        </div>
-        <Input.Root>
+        <Alert message={errorMessage} />
+        <Input.Root error={errors.email?.message}>
           <Input.Label htmlFor="email" icon={AiOutlineMail} />
           <Input.Input
             control={control}
             id="email"
             type="email"
             placeholder="Digite seu email"
+            autoComplete="off"
             {...register('email')}
           />
         </Input.Root>
 
-        <Input.Root>
+        <Input.Root error={errors.password?.message}>
           <Input.Label htmlFor="password" icon={RiLockPasswordLine} />
           <Input.Input
             control={control}
@@ -54,7 +72,10 @@ export default function Login() {
           />
         </Input.Root>
 
-        <Button type="submit">Acessar</Button>
+        <Button type="submit">
+          <FaSignInAlt />
+          Sign in
+        </Button>
       </form>
     </main>
   )
