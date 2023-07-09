@@ -8,6 +8,7 @@ import { useAuthContext } from '@/contexts/AuthContext'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineMail } from 'react-icons/ai'
+import { CgSpinner } from 'react-icons/cg'
 import { FaSignInAlt } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { z } from 'zod'
@@ -32,7 +33,7 @@ export default function Login() {
     resolver: zodResolver(signInFormSchema),
   })
 
-  const { signIn, errorMessage } = useAuthContext()
+  const { signIn, errorMessage, isLoading } = useAuthContext()
 
   const handleFormSignIn = (data: any) => {
     signIn(data)
@@ -72,8 +73,8 @@ export default function Login() {
           />
         </Input.Root>
 
-        <Button type="submit">
-          <FaSignInAlt />
+        <Button type="submit" loading={isLoading}>
+          {isLoading ? <CgSpinner className="animate-spin" /> : <FaSignInAlt />}{' '}
           Sign in
         </Button>
       </form>

@@ -101,9 +101,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // responsavel por verifica se existe um token e validar no servidor
     try {
       const { 'rscore.token': token } = parseCookies()
-      setLoading(true)
 
       if (token) {
+        setLoading(true)
         api
           .get('/session')
           .then((response) => {
@@ -111,13 +111,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
               response.data as ResponseSessionData
 
             setUser({ email, username, roles })
-
-            setLoading(false)
           })
           .catch(() => {
             signOut()
-            setLoading(false)
           })
+        setLoading(false)
       }
     } catch (error) {}
   }, [])
@@ -157,6 +155,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } catch (err) {
       if (isAxiosError<ErrorSignInResponse>(err)) {
         setErrorMessage(err.response?.data.error)
+        setLoading(false)
       }
     }
   }

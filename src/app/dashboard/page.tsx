@@ -1,4 +1,5 @@
 'use client'
+import { Button } from '@/components/form/button'
 import { useAuthContext } from '@/contexts/AuthContext'
 
 export default function Dashboard() {
@@ -7,9 +8,7 @@ export default function Dashboard() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
       <h1>Dashboard {user?.username}</h1>
-      <button className="bg-red-500 py-2 px-10" onClick={signOut}>
-        Logout
-      </button>
+      <Button onClick={signOut}>Logout</Button>
     </main>
   )
 }
