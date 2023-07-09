@@ -9,12 +9,11 @@ export function Button({ children, loading, ...rest }: ButtonProps) {
     <button
       {...rest}
       className={`
-        py-3 hover:bg-blue-600
-      text-white rounded-lg border-[1px] border-zinc-600
+        py-3 hover:bg-white hover:text-black
+       rounded-lg border-[1px] border-zinc-600
         flex justify-center items-center gap-2
         transition ease-in-out delay-75
-        ${loading ? 'text-gray-800' : ''}
-        disabled:hover:bg-transparent
+        ${loading ? 'bg-white text-black' : 'text-white'}
       `}
       disabled={loading}
     >
