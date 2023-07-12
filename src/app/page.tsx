@@ -69,6 +69,7 @@ export default function Login() {
             id="password"
             type="password"
             placeholder="Digite sua senha"
+            autoComplete="on"
             {...register('password')}
           />
         </Input.Root>
