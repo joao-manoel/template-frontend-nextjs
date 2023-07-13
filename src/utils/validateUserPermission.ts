@@ -8,7 +8,7 @@ type userProps = {
 }
 
 type validadeUserPermissionProps = {
-  user: userProps
+  user: userProps | undefined
   roles?: string[]
   permissions?: string[]
 }
@@ -20,17 +20,16 @@ export function validateUserPermissions({
 }: validadeUserPermissionProps): boolean {
   if (user) {
     // verifica se tem a role
-    if (roles) {
+    if (roles && roles.length > 0) {
       const hasRole = user.roles.filter((role) => roles.includes(role.name))
 
       if (hasRole.length >= 1) {
         return true
       }
-
-      return false
     }
+
     // verifica se tem permissao
-    if (permissions) {
+    if (permissions && permissions.length > 0) {
       const userPermissions = user.roles
         .flatMap((role) => role.permissions)
         .map((permission) => permission.name)
@@ -41,9 +40,7 @@ export function validateUserPermissions({
       if (hasPermissions) {
         return true
       }
-      return false
     }
-    return false
   }
 
   return false
