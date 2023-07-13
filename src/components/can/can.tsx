@@ -15,7 +15,7 @@ export function Can({ children, permissions, roles, to }: CanProps) {
 
   if (!useCanSeeComponent) {
     if (to) {
-      return redirect(to)
+      return redirect(`${to}?m=unauthorized`)
     }
     return null
   }
