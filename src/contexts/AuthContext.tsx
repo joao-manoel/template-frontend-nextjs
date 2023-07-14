@@ -98,12 +98,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter()
 
   useEffect(() => {
-    // responsavel por verifica se existe um token e validar no servidor
     try {
+      setLoading(true)
       const { 'rscore.token': token } = parseCookies()
-
       if (token) {
-        setLoading(true)
         api
           .get('/session')
           .then((response) => {
@@ -111,11 +109,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
               response.data as ResponseSessionData
 
             setUser({ email, username, roles })
+            setLoading(false)
           })
           .catch(() => {
             signOut()
           })
-        setLoading(false)
       }
     } catch (error) {}
   }, [])
