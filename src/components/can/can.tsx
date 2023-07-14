@@ -11,9 +11,10 @@ interface CanProps {
 }
 
 export function Can({ children, permissions, roles, to }: CanProps) {
-  const useCanSeeComponent = useCan({ permissions, roles })
+  const userCanSeeComponent = useCan({ permissions, roles })
 
-  if (!useCanSeeComponent) {
+  console.log(userCanSeeComponent)
+  if (!userCanSeeComponent) {
     if (to) {
       return redirect(`${to}?m=unauthorized`)
     }
