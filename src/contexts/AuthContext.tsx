@@ -99,9 +99,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     try {
-      setLoading(true)
       const { 'rscore.token': token } = parseCookies()
       if (token) {
+        setLoading(true)
         api
           .get('/session')
           .then((response) => {
