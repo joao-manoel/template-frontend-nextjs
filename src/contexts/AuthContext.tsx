@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import { api } from '@/services/apiClient'
 import axios, { AxiosError } from 'axios'
@@ -100,6 +101,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     try {
       const { 'rscore.token': token } = parseCookies()
+
       if (token) {
         setLoading(true)
         api
@@ -109,16 +111,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
               response.data as ResponseSessionData
 
             setUser({ email, username, roles })
-            setLoading(false)
           })
           .catch(() => {
             signOut()
+          })
+          .finally(() => {
+            setLoading(false)
           })
       }
     } catch (error) {}
   }, [])
 
-  function signOut() {
+  const signOut = () => {
     setLoading(true)
     destroyCookie(undefined, 'rscore.token')
 

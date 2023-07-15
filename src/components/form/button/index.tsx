@@ -13,7 +13,7 @@ export function Button({ children, loading, ...rest }: ButtonProps) {
        rounded-lg border-[1px] border-zinc-600
         flex justify-center items-center gap-2
         transition ease-in-out delay-75
-        ${loading ? 'bg-white text-black' : 'text-white'}
+        ${loading ? 'bg-white text-black' : 'text-black dark:text-white'}
       `}
       disabled={loading}
     >

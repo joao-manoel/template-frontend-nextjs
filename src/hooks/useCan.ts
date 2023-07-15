@@ -7,7 +7,11 @@ type useCanParams = {
   permissions?: string[]
   roles?: string[]
 }
-export const useCan = ({ permissions = [], roles = [] }: useCanParams) => {
+
+export const useCan = ({
+  permissions = [],
+  roles = [],
+}: useCanParams): boolean => {
   const { user, isAuthenticated } = useAuthContext()
 
   if (!isAuthenticated) {

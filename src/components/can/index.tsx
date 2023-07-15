@@ -1,6 +1,5 @@
 'use client'
 import { useCan } from '@/hooks/useCan'
-import { redirect } from 'next/navigation'
 import { ReactNode } from 'react'
 
 interface CanProps {
@@ -13,10 +12,9 @@ interface CanProps {
 export function Can({ children, permissions, roles, to }: CanProps) {
   const userCanSeeComponent = useCan({ permissions, roles })
 
-  console.log(userCanSeeComponent)
   if (!userCanSeeComponent) {
     if (to) {
-      return redirect(`${to}?m=unauthorized`)
+      // return redirect(to)
     }
     return null
   }

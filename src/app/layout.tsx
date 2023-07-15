@@ -1,7 +1,7 @@
 import { AuthProvider } from '@/contexts/AuthContext'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
-import './globals.css'
+import './assets/css/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
