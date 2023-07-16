@@ -1,3 +1,5 @@
+import { ToggleTheme } from '@/components/toggleTheme'
+
 export default function Dashboard() {
-  return <h1>Pagina inicial</h1>
+  return <ToggleTheme />
 }

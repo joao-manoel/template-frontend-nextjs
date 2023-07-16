@@ -10,10 +10,10 @@ export function AsideRoot({ children, isCollapse }: AsideRootProps) {
     <aside
       data-collapse={isCollapse}
       className={`
-        w-64 data-[collapse='true']:w-24 h-full
+        w-64 data-[collapse='true']:w-16 h-full
         transition ease-in-out delay-75
         bg-[#FEFEFE] dark:bg-zinc-950 shadow-md 
-        py-10 px-2 data-[collapse='true']:px-6 
+        py-10 px-2 
         flex flex-col group
       `}
     >

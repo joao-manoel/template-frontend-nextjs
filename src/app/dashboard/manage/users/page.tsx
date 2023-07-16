@@ -35,15 +35,13 @@ export default function Users() {
     return response.data.data as UsersResponseData
   })
 
-  console.log(data)
-
   return (
     <main className="py-6 mt-20 h-full">
       <header className="w-full flex justify-between items-center">
         <h1 className="text-3xl font-bold">Usuários</h1>
         <button
           className="
-          bg-slate-200 
+          bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800
             py-2 px-4 flex gap-2 items-center
             rounded-md shadow-sm hover:shadow-md transition-all
           "
@@ -61,7 +59,7 @@ export default function Users() {
           <table className="w-full">
             <thead
               className="
-                bg-white border-b-2 border-gray-200 
+                bg-white dark:bg-zinc-900 border-b-2 border-zinc-500 
                 "
             >
               <tr>
@@ -81,25 +79,29 @@ export default function Users() {
             </thead>
             <tbody className="divide-y divide-gray-300">
               {data?.users.map((user) => (
-                <tr className="bg-slate-200" key={user.username}>
-                  <td className="p-3 text-sm text-gray-700">
+                <tr
+                  className="bg-slate-200 dark:bg-zinc-950"
+                  key={user.username}
+                >
+                  <td className="p-3 text-sm text-gray-200">
                     {capitalizeFirstLetter(user.username)}
                   </td>
-                  <td className="p-3 text-sm text-gray-700 whitespace-nowrap">
+                  <td className="p-3 text-sm text-gray-200 whitespace-nowrap">
                     {user.email}
                   </td>
-                  <td className="p-3 text-xs text-gray-700 whitespace-nowrap">
+                  <td className="p-3 text-xs text-gray-200 whitespace-nowrap">
                     {user.roles.map((role) => (
                       <span
                         className={`
                         ${
                           role.name === 'admin'
-                            ? 'bg-yellow-200 text-yellow-800'
+                            ? 'bg-yellow-200 text-yellow-800 dark:bg-yellow-500'
                             : role.name === 'support'
-                            ? 'bg-blue-300 text-blue-800'
+                            ? 'bg-blue-300 text-blue-800 dark:bg-blue-500 dark:text-white'
                             : ''
                         }
-                         bg-opacity-30
+                          text-[8px]
+                          bg-opacity-30
                           p-1.5 font-medium uppercase rounded-lg
                           tracking-wider
                         `}
@@ -110,10 +112,8 @@ export default function Users() {
                     ))}
                   </td>
                   <td className="p-3 text-sm text-white flex gap-2 whitespace-nowrap">
-                    <button className="p-1 bg-blue-500 rounded-sm">
-                      Editar
-                    </button>
-                    <button className="p-1 bg-red-500 rounded-sm">
+                    <button className="p-1 bg-blue-500">Editar</button>
+                    <button className="p-1 bg-red-500 text-white">
                       Excluir
                     </button>
                   </td>
