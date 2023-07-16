@@ -123,12 +123,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   const signOut = () => {
-    setLoading(true)
     destroyCookie(undefined, 'rscore.token')
-
     // authChannel.postMessage('signOut')
-
-    setLoading(false)
     router.push('/')
   }
 
