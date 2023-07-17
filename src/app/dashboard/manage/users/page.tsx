@@ -1,9 +1,11 @@
 'use client'
+import { useQuery } from 'react-query'
+
 import { Can } from '@/components/can'
 import { api } from '@/services/apiClient'
 import { capitalizeFirstLetter } from '@/utils/capitalize'
+import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'
 import { FiUserPlus } from 'react-icons/fi'
-import { useQuery } from 'react-query'
 
 type PermissionsType = {
   name: string
@@ -37,7 +39,7 @@ export default function Users() {
   })
 
   return (
-    <main className="py-6 mt-20 h-full">
+    <main className="py-6 mt-20 w-full">
       <header className="w-full flex justify-between items-center">
         <h1 className="text-3xl font-bold">Usuários</h1>
         <button
@@ -51,7 +53,7 @@ export default function Users() {
           <span>Cadastrar novo usuário</span>
         </button>
       </header>
-      <section className="mt-8 overflow-auto rounded-lg shadow-md">
+      <section className="overflow-auto mt-8 rounded-lg shadow-md scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100">
         {isLoading ? (
           <h1>Loading...</h1>
         ) : error ? (
@@ -91,34 +93,49 @@ export default function Users() {
                     {user.email}
                   </td>
                   <td className="p-3 text-xs text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                    {user.roles.map((role) => (
+                    {user.roles.length > 0 ? (
+                      user.roles.map((role) => (
+                        <span
+                          className={`
+                          ${
+                            role.name === 'admin'
+                              ? 'bg-yellow-200 text-yellow-800 dark:bg-yellow-500'
+                              : role.name === 'support'
+                              ? 'bg-blue-300 text-blue-800 dark:bg-blue-500 dark:text-white'
+                              : ''
+                          }
+                          bg-opacity-30
+                          text-[8px] p-1.5 font-medium uppercase
+                          rounded-lg tracking-wider
+                        `}
+                          key={role.name}
+                        >
+                          {role.description}
+                        </span>
+                      ))
+                    ) : (
                       <span
                         className={`
-                        ${
-                          role.name === 'admin'
-                            ? 'bg-yellow-200 text-yellow-800 dark:bg-yellow-500'
-                            : role.name === 'support'
-                            ? 'bg-blue-300 text-blue-800 dark:bg-blue-500 dark:text-white'
-                            : ''
-                        }
-                          text-[8px]
-                          bg-opacity-30
-                          p-1.5 font-medium uppercase rounded-lg
-                          tracking-wider
+                          bg-black text-white bg-opacity-30
+                          text-[8px] p-1.5 font-medium uppercase 
+                          rounded-lg tracking-wider 
                         `}
-                        key={role.name}
                       >
-                        {role.description}
+                        User
                       </span>
-                    ))}
+                    )}
                   </td>
                   <td className="p-3 text-sm text-white flex gap-2 whitespace-nowrap">
                     <Can permissions={['edit_users']}>
-                      <button className="p-1 bg-blue-500">Editar</button>
+                      <button className="py-2 px-3 bg-blue-500 rounded-md flex gap-2 items-center">
+                        <AiFillEdit />
+                        <span>Editar</span>
+                      </button>
                     </Can>
                     <Can permissions={['delete_users']}>
-                      <button className="p-1 bg-red-500 text-white">
-                        Excluir
+                      <button className="py-2 px-3 bg-red-500 text-white rounded-md flex gap-2 items-center">
+                        <AiOutlineDelete />
+                        <span>Delete</span>
                       </button>
                     </Can>
                   </td>

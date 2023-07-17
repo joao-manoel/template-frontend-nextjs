@@ -12,8 +12,15 @@ interface MainWrapperProps {
 export function MainWrapper({ children, handleCollapseNav }: MainWrapperProps) {
   const { user } = useAuthContext()
   return (
-    <main className="flex flex-col flex-1 px-11 py-6">
-      <header className=" flex items-center">
+    <main
+      className="
+        w-full h-full
+        flex flex-col flex-1
+        pl-11 pr-11 pxl py-6
+        overflow-auto
+      "
+    >
+      <header className="flex items-center ">
         <section className="flex-1 flex gap-8">
           <button className="text-4xl" onClick={handleCollapseNav}>
             <GiHamburgerMenu />
