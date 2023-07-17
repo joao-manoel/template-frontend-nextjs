@@ -1,4 +1,5 @@
 'use client'
+import { Can } from '@/components/can'
 import { api } from '@/services/apiClient'
 import { capitalizeFirstLetter } from '@/utils/capitalize'
 import { FiUserPlus } from 'react-icons/fi'
@@ -83,13 +84,13 @@ export default function Users() {
                   className="bg-slate-200 dark:bg-zinc-950"
                   key={user.username}
                 >
-                  <td className="p-3 text-sm text-gray-200">
+                  <td className="p-3 text-sm text-gray-700 dark:text-gray-200">
                     {capitalizeFirstLetter(user.username)}
                   </td>
-                  <td className="p-3 text-sm text-gray-200 whitespace-nowrap">
+                  <td className="p-3 text-sm text-gray-700 dark:text-gray-200 whitespace-nowrap">
                     {user.email}
                   </td>
-                  <td className="p-3 text-xs text-gray-200 whitespace-nowrap">
+                  <td className="p-3 text-xs text-gray-700 dark:text-gray-200 whitespace-nowrap">
                     {user.roles.map((role) => (
                       <span
                         className={`
@@ -112,10 +113,14 @@ export default function Users() {
                     ))}
                   </td>
                   <td className="p-3 text-sm text-white flex gap-2 whitespace-nowrap">
-                    <button className="p-1 bg-blue-500">Editar</button>
-                    <button className="p-1 bg-red-500 text-white">
-                      Excluir
-                    </button>
+                    <Can permissions={['edit_users']}>
+                      <button className="p-1 bg-blue-500">Editar</button>
+                    </Can>
+                    <Can permissions={['delete_users']}>
+                      <button className="p-1 bg-red-500 text-white">
+                        Excluir
+                      </button>
+                    </Can>
                   </td>
                 </tr>
               ))}

@@ -25,13 +25,13 @@ export function Sidebar({ isCollapse }: SidebarProps) {
             href="/dashboard/manage/users"
             title="Usuarios"
             icon={FaUsersCog}
-            permissions={['manage_users']}
+            permissions={['view_users']}
           />
           <Aside.Nav.Item
             href="/dashboard/manage/roles"
             title="Cargos"
             icon={SiSecurityscorecard}
-            permissions={['manage_roles']}
+            permissions={['view_roles']}
           />
         </Aside.Nav.Section>
         <Aside.Nav.Section data-collapse={isCollapse}>
