@@ -1,4 +1,4 @@
-import { useAuthContext } from '@/contexts/AuthContext'
+import { useAuthContext } from '@/app/contexts/AuthContext'
 import { capitalizeFirstLetter } from '@/utils/capitalize'
 import { ReactNode } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'

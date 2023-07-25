@@ -1,10 +1,4 @@
 'use client'
-
-import { Alert } from '@/components/alert'
-import { Button } from '@/components/form/button'
-import { Input } from '@/components/form/input'
-import { useAuthContext } from '@/contexts/AuthContext'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { AiOutlineMail } from 'react-icons/ai'
@@ -12,6 +6,11 @@ import { CgSpinner } from 'react-icons/cg'
 import { FaSignInAlt } from 'react-icons/fa'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { z } from 'zod'
+
+import { Alert } from '@/app/components/alert'
+import { Button } from '@/app/components/form/button'
+import { Input } from '@/app/components/form/input'
+import { useAuthContext } from '@/app/contexts/AuthContext'
 
 const signInFormSchema = z.object({
   email: z

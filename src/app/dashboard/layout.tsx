@@ -1,5 +1,5 @@
 'use client'
-import { Can } from '@/components/can/'
+import { Can } from '@/app/components/can/'
 import { ReactNode, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { MainWrapper } from './components/mainWrapper'

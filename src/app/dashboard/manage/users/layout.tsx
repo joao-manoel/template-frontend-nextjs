@@ -1,4 +1,4 @@
-import { Can } from '@/components/can'
+import { Can } from '@/app/components/can'
 import { ReactNode } from 'react'
 
 export default function RootLayout({ children }: { children: ReactNode }) {

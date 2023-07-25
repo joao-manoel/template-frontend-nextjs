@@ -1,4 +1,4 @@
-import { ToggleTheme } from '@/components/toggleTheme'
+import { ToggleTheme } from '@/app/components/toggleTheme'
 
 export default function Dashboard() {
   return <ToggleTheme />

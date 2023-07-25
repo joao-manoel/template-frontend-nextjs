@@ -1,8 +1,8 @@
-import { AuthProvider } from '@/contexts/AuthContext'
+import { AuthProvider } from '@/app/contexts/AuthContext'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 
-import { ThemeProvider } from '@/contexts/ThemeContext'
+import { ThemeProvider } from '@/app/contexts/ThemeContext'
 import './assets/css/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })

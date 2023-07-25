@@ -1,7 +1,7 @@
 'use client'
 import { useQuery } from 'react-query'
 
-import { Can } from '@/components/can'
+import { Can } from '@/app/components/can'
 import { api } from '@/services/apiClient'
 import { capitalizeFirstLetter } from '@/utils/capitalize'
 import { AiFillEdit, AiOutlineDelete } from 'react-icons/ai'

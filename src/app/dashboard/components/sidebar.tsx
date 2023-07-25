@@ -1,5 +1,5 @@
-import { Aside } from '@/components/aside'
-import { useAuthContext } from '@/contexts/AuthContext'
+import { Aside } from '@/app/components/aside'
+import { useAuthContext } from '@/app/contexts/AuthContext'
 import { FaUsersCog } from 'react-icons/fa'
 import { LuSettings } from 'react-icons/lu'
 import { PiSignOutBold } from 'react-icons/pi'
