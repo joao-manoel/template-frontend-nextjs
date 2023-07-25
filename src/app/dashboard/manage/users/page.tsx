@@ -62,7 +62,7 @@ export default function Users() {
           <table className="w-full">
             <thead
               className="
-                bg-white dark:bg-zinc-900 border-b-2 border-zinc-500 
+                bg-white dark:bg-zinc-950 border-b-2 border-zinc-500 dark:border-zinc-900
                 "
             >
               <tr>
@@ -80,7 +80,7 @@ export default function Users() {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-300">
+            <tbody className="divide-y divide-gray-300 dark:divide-zinc-900">
               {data?.users.map((user) => (
                 <tr
                   className="bg-slate-200 dark:bg-zinc-950"
